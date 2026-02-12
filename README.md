@@ -68,7 +68,7 @@ Visualisasi dan eksplorasi data disajikan dalam bentuk dashboard interaktif.
 ## 7. Hasil dan Temuan Utama
 
 ### 7.1 Persepsi Umum Pengunjung
-![Overall](report\images\overall.png)
+![Overall](report/images/overall.png)
 - **Rata-rata rating**: 4,61 / 5
 - **Ulasan positif**: 86,33%
 - Kata kunci dominan:
