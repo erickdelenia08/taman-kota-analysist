@@ -84,7 +84,9 @@ Visualisasi dan eksplorasi data disajikan dalam bentuk dashboard interaktif.
 
 ### 7.2 Analisis Sentimen Negatif
 ![Overall](report/images/negative.png)
+
 Meskipun proporsi ulasan negatif relatif kecil, beberapa isu muncul secara konsisten:
+
 1. **Kebersihan dan pengelolaan sampah**
 2. **Kurangnya penerangan pada malam hari**
 3. **Kondisi fasilitas anak dan playground**
