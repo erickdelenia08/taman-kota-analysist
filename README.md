@@ -83,6 +83,7 @@ Visualisasi dan eksplorasi data disajikan dalam bentuk dashboard interaktif.
 ---
 
 ### 7.2 Analisis Sentimen Negatif
+![Overall](report/images/negative.png)
 Meskipun proporsi ulasan negatif relatif kecil, beberapa isu muncul secara konsisten:
 1. **Kebersihan dan pengelolaan sampah**
 2. **Kurangnya penerangan pada malam hari**
@@ -94,6 +95,7 @@ Isu-isu ini bersifat spesifik dan berulang, bukan keluhan umum terhadap keseluru
 ---
 
 ### 7.3 Analisis Temporal
+<!-- ![Overall](report/images/overall.png) -->
 Perbandingan antara periode **2014–2026** dan **lima tahun terakhir (sejak 2022)** menunjukkan:
 - Keluhan terkait **sampah** muncul secara konsisten sepanjang waktu
 - Keluhan mengenai **penerangan malam hari** dan **fasilitas anak** meningkat pada periode terbaru
@@ -102,6 +104,7 @@ Perbandingan antara periode **2014–2026** dan **lima tahun terakhir (sejak 202
 ---
 
 ### 7.4 Analisis Isu Spesifik: Sampah
+![Overall](report/images/sampah.png)
 Hasil penyaringan ulasan negatif dengan kata kunci *sampah* menunjukkan:
 - ±25 ulasan negatif secara eksplisit membahas sampah
 - Rata-rata rating masih tergolong sedang (±3,6)
