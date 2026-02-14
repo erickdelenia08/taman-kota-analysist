@@ -1,149 +1,176 @@
 # 📊 Analisis Ulasan Publik Alun-Alun Lumajang (2014 – Awal 2026)
 
 ## 1. Gambaran Proyek
-Proyek ini bertujuan untuk menganalisis persepsi publik terhadap **Alun-Alun Lumajang** berdasarkan ulasan Google yang dikumpulkan selama periode 2014 hingga awal 2026. Analisis difokuskan pada pemahaman sentimen pengunjung secara keseluruhan serta identifikasi isu-isu spesifik yang masih menjadi keluhan meskipun tingkat kepuasan relatif tinggi.
+Proyek ini menganalisis persepsi publik terhadap **Alun-Alun Lumajang** berdasarkan ±4.900 ulasan Google selama periode 2014 hingga awal 2026.  
+
+Analisis dilakukan untuk:
+- Mengukur sentimen pengunjung secara keseluruhan
+- Mengidentifikasi isu spesifik yang sering dikeluhkan
+- Melihat perkembangan isu dari waktu ke waktu
 
 ---
 
-## 2. Rumusan Masalah
-**Bagaimana persepsi pengunjung terhadap Alun-Alun Lumajang dalam jangka panjang, dan isu apa saja yang secara konsisten memunculkan ulasan negatif?**
-
----
-
-## 3. Data
-- **Sumber data**: Google Reviews (hasil scraping)
-- **Periode waktu**: 2014 – awal 2026
-- **Jumlah ulasan**: ±4.900
-- **Atribut data mentah**:
+## 2. Data
+- Sumber: Google Reviews (scraping)
+- Periode: 2014 – awal 2026
+- Atribut mentah:
   - `review_id`
   - `review_text`
   - `rating`
   - `review_date`
 
-Data tidak memiliki metadata tambahan seperti profil pengguna atau kategori tempat.
-
 ---
 
-## 4. Pra-pemrosesan Data
-Seluruh proses pra-pemrosesan dilakukan menggunakan **Python**, meliputi:
-- Konversi teks ke huruf kecil
-- Penghapusan URL, emoji, dan karakter non-alfabet
-- Normalisasi tanda baca dan spasi
-- Penanganan ulasan tanpa teks (rating-only)
+## 3. Metodologi
 
-Pra-pemrosesan dilakukan untuk mengurangi noise tanpa menghilangkan makna semantik utama dari ulasan.
+### 3.1 Preprocessing
+Dilakukan menggunakan Python:
+- Lowercasing
+- Penghapusan URL & karakter non-alfabet
+- Normalisasi teks
+- Pembersihan noise
 
----
+### 3.2 Pelabelan Sentimen
+Sentimen dilabeli menggunakan model **IndoBERT pre-trained**:
 
-## 5. Pelabelan Sentimen
-Pelabelan sentimen dilakukan menggunakan **model IndoBERT pra-latih** yang dikembangkan oleh pihak ketiga:
-
-🔗 Referensi model:  
+Model:
 https://huggingface.co/crypter70/IndoBERT-Sentiment-Analysis
 
-### Catatan Metodologis
-- Model dilatih pada data berbahasa Indonesia dengan karakteristik yang mirip (ulasan publik).
-- Label sentimen (*positif, negatif, netral*) diperlakukan sebagai **indikasi sentimen dominan**, bukan kebenaran absolut.
-- Beberapa ulasan mengandung **sentimen campuran**, misalnya pujian yang disertai keluhan.
-
-Untuk mengatasi keterbatasan tersebut, analisis sentimen dikombinasikan dengan **analisis berbasis kata kunci** dan **eksplorasi temporal**.
+Catatan penting:
+- Model bukan dilatih khusus untuk dataset ini
+- Beberapa review mengandung **sentimen campuran (positif + negatif)**
+- Oleh karena itu, analisis isu menggunakan **keyword searching dilakukan pada seluruh sentimen (positif & negatif)** untuk menangkap konteks lebih luas
 
 ---
 
-## 6. Metodologi Analisis
-Pendekatan analisis yang digunakan meliputi:
-- Analisis distribusi sentimen
-- Analisis tren waktu (rating dan jumlah ulasan)
-- Word cloud:
-  - Seluruh ulasan
-  - Ulasan negatif
-  - Perbandingan lintas periode waktu
-- Analisis isu berbasis kata kunci  
-  Contoh kata kunci: `sampah`, `penerangan`, `parkir`, `playground`, `anak`
+## 4. Hasil Analisis Umum
 
-Visualisasi dan eksplorasi data disajikan dalam bentuk dashboard interaktif.
+- Rata-rata rating: **4,61**
+- Sentimen positif: **86,33%**
+- Kata dominan:
+  - bersih
+  - nyaman
+  - indah
+  - keluarga
+  - anak
 
----
+📌 Secara umum, persepsi pengunjung sangat positif dan Alun-Alun Lumajang dipandang sebagai ruang publik yang nyaman dan ramah keluarga.
 
-## 7. Hasil dan Temuan Utama
-
-### 7.1 Persepsi Umum Pengunjung
-![Overall](report/images/overall.png)
-- **Rata-rata rating**: 4,61 / 5
-- **Ulasan positif**: 86,33%
-- Kata kunci dominan:
-  - *bersih*
-  - *nyaman*
-  - *indah*
-  - *keluarga*
-  - *anak*
-
-➡️ Secara keseluruhan, Alun-Alun Lumajang dipersepsikan sangat positif sebagai ruang publik yang bersih, nyaman, dan ramah keluarga.
+![Dashboard Overall](report/images/overall.png)
 
 ---
 
-### 7.2 Analisis Sentimen Negatif
-![Overall](report/images/negative.png)
+# 5. Analisis Isu Spesifik
 
-Meskipun proporsi ulasan negatif relatif kecil, beberapa isu muncul secara konsisten:
-
-1. **Kebersihan dan pengelolaan sampah**
-2. **Kurangnya penerangan pada malam hari**
-3. **Kondisi fasilitas anak dan playground**
-4. **Pengelolaan parkir**
-
-Isu-isu ini bersifat spesifik dan berulang, bukan keluhan umum terhadap keseluruhan kawasan.
+Meskipun tingkat kepuasan tinggi, beberapa isu muncul secara konsisten.
 
 ---
 
-### 7.3 Analisis Temporal
-<!-- ![Overall](report/images/overall.png) -->
-Perbandingan antara periode **2014–2026** dan **lima tahun terakhir (sejak 2022)** menunjukkan:
-- Keluhan terkait **sampah** muncul secara konsisten sepanjang waktu
-- Keluhan mengenai **penerangan malam hari** dan **fasilitas anak** meningkat pada periode terbaru
-- Terjadi pergeseran fokus dari isu infrastruktur dasar menuju **kualitas pengalaman dan pemeliharaan fasilitas**
+## 5.1 Isu Sampah
+
+### Insight
+- Terdapat peningkatan pembahasan isu **sampah dalam satu tahun terakhir**
+- Sebelumnya sempat mengalami penurunan
+- Dibahas di berbagai jenis sentimen (tidak hanya negatif)
+
+Masalah utama:
+- Sampah berserakan
+- Perilaku pengunjung membuang sampah sembarangan
+- Kurangnya kesadaran masyarakat
+
+📌 Isu ini bersifat **perilaku sosial dan pengelolaan kebersihan**
+
+![Keyword Sampah](report/images/keyword_sampah_dashboard.png)
 
 ---
 
-### 7.4 Analisis Isu Spesifik: Sampah
-![Overall](report/images/sampah.png)
-Hasil penyaringan ulasan negatif dengan kata kunci *sampah* menunjukkan:
-- ±25 ulasan negatif secara eksplisit membahas sampah
-- Rata-rata rating masih tergolong sedang (±3,6)
-- Banyak ulasan menyoroti **perilaku pengunjung dan rendahnya kesadaran masyarakat**, bukan hanya kinerja petugas kebersihan
+## 5.2 Isu Penerangan
 
-➡️ Masalah sampah dipersepsikan sebagai gangguan yang berulang, bukan kegagalan total pengelolaan.
+### Insight
+- Beberapa spot terlihat gelap pada malam hari
+- Isu ini konsisten muncul hampir setiap tahun
+- Mengurangi estetika dan kenyamanan malam hari
 
----
+📌 Permasalahan ini berkaitan dengan pemeliharaan fasilitas penerangan
 
-## 8. Implikasi dan Rekomendasi
-- **Pertahankan keunggulan**: kebersihan umum dan desain ramah keluarga
-- **Tingkatkan konsistensi pengelolaan**:
-  - Penambahan dan perawatan tempat sampah
-  - Pemeliharaan lampu penerangan malam hari
-  - Inspeksi rutin fasilitas playground
-- **Pendekatan perilaku**:
-  - Edukasi dan peningkatan kesadaran pengunjung
+![Keyword Penerangan](report/images/keyword_penerangan_dashboard.png)
 
 ---
 
-## 9. Keterbatasan
-- Pelabelan sentimen bergantung pada model pra-latih pihak ketiga
-- Ulasan dengan sentimen campuran dapat menimbulkan bias klasifikasi
-- Tidak tersedia metadata pengguna untuk analisis demografis
+## 5.3 Isu Playground / Fasilitas Anak
 
-Keterbatasan ini dikompensasi melalui pendekatan eksploratif, analisis kata kunci, dan tren waktu.
+### Insight
+- Banyak ulasan menyebut fasilitas bermain anak mulai rusak
+- Beberapa dianggap kurang aman
+- Isu ini semakin dominan dalam 5 tahun terakhir
+
+Temuan ini juga didukung oleh pemberitaan media:
+
+- Radar Jember (Nov 2023):  
+  https://radarjember.jawapos.com/lumajang/793232914/semakin-mangkrak-pemkab-pertimbangkan-penutupanplay-ground-alun-alun-lumajang
+
+- Radar Jember (Des 2024):  
+  https://radarjember.jawapos.com/lumajang/795475540/fasilitas-play-ground-alun-alun-lumajang-masih-jauh-dari-kota-ramah-anak
+
+📌 Ini menunjukkan konsistensi antara data ulasan publik dan kondisi faktual di lapangan.
+
+![Keyword Playground](report/images/keyword_playground_dashboard.png)
 
 ---
 
-## 10. Tools & Skill yang Digunakan
-- Python (data cleaning, preprocessing, analisis teks)
-- NLP (sentiment analysis, word cloud)
-- Dashboarding (Power BI / Looker Studio)
-- Analisis eksploratif & diagnostik
-- Interpretasi data untuk rekomendasi kebijakan
+## 5.4 Isu Parkir
+
+### Insight
+- Masih marak parkir liar
+- Tata kelola parkir dinilai kurang optimal
+- Lahan parkir dirasa kurang saat momen padat pengunjung
+- Parkir sembarangan di sudut-sudut alun-alun
+
+📌 Isu ini berkaitan dengan manajemen ruang dan pengawasan
+
+![Keyword Parkir](report/images/keyword_parkir_dashboard.png)
 
 ---
 
-## 11. Ringkasan Portfolio
-> Melakukan analisis lebih dari 4.900 ulasan publik selama 12 tahun menggunakan Python dan teknik NLP. Menggunakan model IndoBERT pre-trained sebagai baseline pelabelan sentimen dan mengombinasikannya dengan analisis berbasis kata kunci serta tren temporal untuk menghasilkan insight yang aplikatif bagi pengelolaan ruang publik.
+# 6. Ringkasan Insight Utama
+
+1. Tingkat kepuasan pengunjung sangat tinggi (86% positif)
+2. Isu kebersihan meningkat kembali dalam setahun terakhir
+3. Penerangan malam hari menjadi keluhan konsisten
+4. Playground dan fasilitas anak menunjukkan tanda-tanda penurunan kualitas
+5. Parkir liar masih menjadi masalah tata kelola
+
+---
+
+# 7. Keterbatasan Analisis
+
+- Model sentimen menggunakan pre-trained model pihak ketiga
+- Review dengan sentimen campuran bisa menyebabkan bias klasifikasi
+- Tidak tersedia metadata demografis pengguna
+
+Untuk meminimalkan bias, analisis dikombinasikan dengan:
+- Keyword searching seluruh sentimen
+- Analisis tren waktu
+- Validasi konteks melalui kutipan review dan berita eksternal
+
+---
+
+# 8. Tools & Teknologi
+
+- Python (Pandas, NLP preprocessing)
+- IndoBERT (Sentiment Analysis)
+- Power BI (Dashboard & Visualisasi)
+- Word Cloud
+- Exploratory Text Analysis
+
+---
+
+# 9. Kesimpulan
+
+Secara keseluruhan, Alun-Alun Lumajang memiliki citra publik yang sangat positif.  
+Namun, terdapat isu berulang terkait kebersihan, penerangan malam hari, fasilitas playground, dan pengelolaan parkir yang memerlukan perhatian berkelanjutan.
+
+Analisis ini menunjukkan bagaimana data ulasan publik dapat digunakan untuk:
+- Mengidentifikasi masalah spesifik
+- Memantau tren isu dari waktu ke waktu
+- Memberikan insight berbasis data untuk pengambilan kebijakan
